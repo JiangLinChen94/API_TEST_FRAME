@@ -40,7 +40,7 @@ class ExcelUtils():
         first_row = self.sheet.row(0)
         for row in range(1, self.get_row_count()):
             row_dict = {}
-            for col in range(1, self.get_col_count()):
+            for col in range(0, self.get_col_count()):
                 row_dict[first_row[col].value] = self.get_merged_cell_value(row, col)
             all_data_list.append(row_dict)
         return all_data_list
