@@ -21,7 +21,9 @@ class LogUtils():
 
         console_handler = logging.StreamHandler()
         file_handler = logging.FileHandler(self.log_name, 'a', encoding='utf-8')
-        formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s")
+        formatter = logging.Formatter(
+            '[%(asctime)s] %(filename)s->%(funcName)s line:%(lineno)d [%(levelname)s] : %(message)s'
+            )
         console_handler.setFormatter(formatter)
         file_handler.setFormatter(formatter)
 
@@ -36,7 +38,6 @@ class LogUtils():
 
 
 logger = LogUtils().get_logger()
-
 
 if __name__ == '__main__':
     logger.info('hello')

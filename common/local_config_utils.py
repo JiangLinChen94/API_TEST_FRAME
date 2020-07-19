@@ -6,7 +6,6 @@
 
 import os
 import configparser
-from common import config_utils
 
 current_path = os.path.dirname(__file__)
 config_path = os.path.join(current_path, '..', r'conf/config.ini')
