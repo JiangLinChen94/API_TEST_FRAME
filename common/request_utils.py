@@ -10,6 +10,7 @@ import re
 import jsonpath
 import requests
 from common.local_config_utils import local_config
+from common.check_util import CheckUtil
 
 
 class RequestsUtils():
@@ -59,13 +60,7 @@ class RequestsUtils():
             self.temp_variables[post_info["传值变量"]] = value
             print(value)
 
-        result = {
-            "code": 0,  # 标识位
-            "response_reason": response.reason,
-            "response_code": response.status_code,
-            'response_headers': response.headers,
-            'response_body': response.text
-        }
+        result = CheckUtil(response).run_check(post_info['期望结果类型'], post_info['期望结果'])
         return result
 
     def request(self, step_info):
