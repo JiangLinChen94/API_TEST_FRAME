@@ -5,6 +5,7 @@
 # @time: 2020/7/5 11:01
 
 import os
+import pandas as pd
 from common.excel_utils import ExcelUtils
 from common.local_config_utils import local_config
 
@@ -27,10 +28,10 @@ class TestDataUtils():
         test_case_list = []
         for k, v in self.__get_test_case_data_dict().items():
             one_case_dict = {}
-            one_case_dict["case_name"] = k
-            one_case_dict['case_info'] = v
+            one_case_dict["case_id"] = k
+            one_case_dict['case_info']= v
             test_case_list.append(one_case_dict)
-        return test_case_list
+        return tuple(test_case_list)
 
 
 if __name__ == '__main__':

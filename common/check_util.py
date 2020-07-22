@@ -43,7 +43,7 @@ class CheckUtil():
         res_list = []  # 存放每次比较的结果
         wrong_key = []  # 存放比较失败的key
         for check_data in check_data_list:
-            if check_data in self.check_response.json.keys():
+            if check_data in self.check_response.json().keys():
                 res_list.append(self.pass_result)
             else:
                 res_list.append(self.fail_result)
@@ -57,7 +57,7 @@ class CheckUtil():
         res_list = []
         wrong_items = []
         for check_item in ast.literal_eval(check_data).items():
-            if check_item in self.check_response.items():
+            if check_item in self.check_response.json().items():
                 res_list.append(self.pass_result)
             else:
                 res_list.append(self.fail_result)
@@ -69,7 +69,8 @@ class CheckUtil():
 
     def check_regexp(self, check_data=None):
         pattern = re.compile(check_data)
-        if re.findall(pattern=pattern, string=self.check_response):
+        if re.findall(pattern=pattern, string=self.check_response.text):
+            # print(self.pass_result)
             return self.pass_result
         else:
             return self.fail_result
@@ -89,4 +90,5 @@ class CheckUtil():
 
 
 if __name__ == '__main__':
-    CheckUtil().check_key("access_token,expires_in")
+    # CheckUtil().check_key("access_token,expires_in")
+    pass
