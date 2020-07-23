@@ -32,15 +32,24 @@ class LocalConfigUtils():
         return log_path
 
     @property
+    def REPORTS_PATH(self):
+        reports_path = self.cfg.get('path', 'REPORTS_PATH')
+        return reports_path
+
+    @property
+    def CASE_PATH(self):
+        case_path = self.cfg.get('path', 'CASE_PATH')
+        return case_path
+
+    @property
     def LOG_LEVEL(self):
         log_level = int(self.cfg.get('log', 'LOG_LEVEL'))
         return log_level
-
 
 
 local_config = LocalConfigUtils()
 
 if __name__ == '__main__':
     cfg = LocalConfigUtils()
-    print(cfg.URL)
-    print(cfg.CASE_DATA_PATH)
+    print(cfg.CASE_PATH)
+    print(cfg.REPORTS_PATH)
