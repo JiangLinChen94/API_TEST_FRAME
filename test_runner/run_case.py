@@ -8,6 +8,7 @@ import os
 import unittest
 from common.local_config_utils import local_config
 from common import HTMLTestReportCN
+from common.email_utils import EmailUtils
 
 current_path = os.path.dirname(__file__)
 test_case_path = os.path.join(current_path, '..', local_config.CASE_PATH)
@@ -46,3 +47,4 @@ class RunCase:
 
 if __name__ == '__main__':
     report_path = RunCase().run()
+    EmailUtils(open(report_path, 'rb').read(), report_path).send_mail()
