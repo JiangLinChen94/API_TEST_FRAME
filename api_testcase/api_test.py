@@ -10,7 +10,7 @@ import paramunittest
 from common.request_utils import RequestsUtils
 from common.testdata_utils import TestDataUtils
 
-case_infos = TestDataUtils().get_test_case_data_list()
+case_infos = TestDataUtils().get_test_case_data_list_by_mysql()
 
 
 @paramunittest.parametrized(
