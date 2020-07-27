@@ -14,7 +14,10 @@ from requests.exceptions import ProxyError
 from requests.exceptions import ConnectionError
 from common.local_config_utils import local_config
 from common.check_util import CheckUtil
+from common.testdata_utils import TestDataUtils
+from nb_log import LogManager
 
+logger = LogManager(__file__).get_logger_and_add_handlers()
 
 class RequestsUtils():
     def __init__(self):
@@ -94,8 +97,10 @@ class RequestsUtils():
                 result = self.__post(step_info)
             else:
                 result = {'code': 1, 'result': '请求方式不支持'}
+                logger.error('请求方式不支持')
         except Exception as e:
             result = {'code': 4, 'result': '用例编号[%s]的[%s]步骤出现系统异常，原因：%s' % (step_info['测试用例编号'], step_info["测试用例步骤"], e.__str__())}
+            logger.error('用例编号[%s]的[%s]步骤出现系统异常，原因：%s' % (step_info['测试用例编号'], step_info["测试用例步骤"], e.__str__()))
         return result
 
     def request_by_step(self, step_infos):
@@ -103,7 +108,10 @@ class RequestsUtils():
         for step_info in step_infos:
             temp_result = self.request(step_info)
             if temp_result['code'] != 0:
+                TestDataUtils().write_result_to_excel(step_info['测试用例编号'],step_info['测试用例步骤'],'失败')
                 break
+            else:
+                TestDataUtils().write_result_to_excel(step_info['测试用例编号'], step_info['测试用例步骤'])
         return temp_result
 
 
